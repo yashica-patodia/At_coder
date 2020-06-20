@@ -53,44 +53,44 @@ void solve()
 {
 	int n;
 	cin>>n;
-	cout<<n;
+	//cout<<n;
 
 	//vector<pair<lli,pair<lli,lli> > >v;
-	// //vector<pair<int,pair<int,int> > >v;
-	// for(int i=0;i<n;i++)
-	// {
-	// 	int w,s,val;
-	// 	cin>>w>>s>>val;
-	// 	cout<<w;
-	// 	//v.push_back({s+w,{w,val}});
-	// 	//v.push_back(MP(s+w,MP(w,val)));
-	// }
-	// // sort(all(v));
-	// cout<<v[0].ff<<v[0].ss.ff<<v[0].ss.ss<<endl;
+	vector<pair<int,pair<int,int> > >v;
+	for(int i=0;i<n;i++)
+	{
+		int w,s,val;
+		cin>>w>>s>>val;
+		//cout<<w;
+		v.push_back({s+w,{w,val}});
+		//v.push_back(MP(s+w,MP(w,val)));
+	}
+	sort(all(v));
+	//cout<<v[0].ff<<v[0].ss.ff<<v[0].ss.ss<<endl;
 	//lli dp[N]={0};
-	// vector<lli>dp(N,0);
-	// for(int i=0;i<n;i++)
-	// {
-	// 	int st=v[i].ff;
-	// 	int w=v[i].ss.ff;
-	// 	int val=v[i].ss.ss;
-	// 	cout<<st<<" "<<w<<" "<<val<<endl;
-	// 	for(int j=st-w;j>=0;j--)
-	// 	{
-	// 		if(j+w<=st)
-	// 			dp[j+w]=max(dp[j+w]*1LL,(dp[j]+val)*1LL);
+	vector<lli>dp(N,0);
+	for(int i=0;i<n;i++)
+	{
+		int st=v[i].ff;
+		int w=v[i].ss.ff;
+		int val=v[i].ss.ss;
+		//cout<<st<<" "<<w<<" "<<val<<endl;
+		for(int j=st-w;j>=0;j--)
+		{
+			if(j+w<=st)
+				dp[j+w]=max(dp[j+w]*1LL,(dp[j]+val)*1LL);
 
-	// 	}
-	// }
+		}
+	}
 
-	//cout<<*max_element(all(dp))<<endl;
+	cout<<*max_element(all(dp))<<endl;
 }
 int main()
 {
-		#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	freopen("output.txt","w",stdout);
-	#endif
+	// 	#ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// freopen("output.txt","w",stdout);
+	// #endif
 	IOS
 	
 	

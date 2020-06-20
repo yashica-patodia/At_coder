@@ -1,9 +1,3 @@
-///exchange arguments to find sorting condition
-//order matters
-//consider two elemenys
-//suppose 1 is always above 2 
-//then it means S2>=W1 && S1<W2
-//adding bothbof them S2+W2>S1+W1
 #include<bits/stdc++.h>
 #pragma GCC optimize("Ofast")
 #pragma GCC optimize ("unroll-loops")
@@ -47,54 +41,57 @@ typedef vector<int> vi;
 //typedef  vector<vector<lli> >ncr(1001,vector<lli>(1001,0))
 typedef vector<plli> vplli;
 long long MOD=1000000009;
-lli N=10000001;
 #define addm(x,y) (x+y>=MOD? (x+y-MOD):(x+y))
-void solve()
+lli dp[3002][3002];
+lli vis[3002][3002];
+vector<lli>a;
+lli recu(lli i,lli j)
 {
-	int n;
-	cin>>n;
-	cout<<n;
+	if(vis[i][j])
+		return dp[i][j];
+	vis[i][j]=1;
+	if(i==j)
+		 return dp[i][j]=a[i];
 
-	//vector<pair<lli,pair<lli,lli> > >v;
-	// //vector<pair<int,pair<int,int> > >v;
-	// for(int i=0;i<n;i++)
-	// {
-	// 	int w,s,val;
-	// 	cin>>w>>s>>val;
-	// 	cout<<w;
-	// 	//v.push_back({s+w,{w,val}});
-	// 	//v.push_back(MP(s+w,MP(w,val)));
-	// }
-	// // sort(all(v));
-	// cout<<v[0].ff<<v[0].ss.ff<<v[0].ss.ss<<endl;
-	//lli dp[N]={0};
-	// vector<lli>dp(N,0);
-	// for(int i=0;i<n;i++)
-	// {
-	// 	int st=v[i].ff;
-	// 	int w=v[i].ss.ff;
-	// 	int val=v[i].ss.ss;
-	// 	cout<<st<<" "<<w<<" "<<val<<endl;
-	// 	for(int j=st-w;j>=0;j--)
-	// 	{
-	// 		if(j+w<=st)
-	// 			dp[j+w]=max(dp[j+w]*1LL,(dp[j]+val)*1LL);
+	return dp[i][j]=max(a[i]-recu(i+1,j),a[j]-recu(i,j-1));	
 
-	// 	}
-	// }
-
-	//cout<<*max_element(all(dp))<<endl;
 }
 int main()
 {
-		#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	freopen("output.txt","w",stdout);
-	#endif
+	// 	#ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// freopen("output.txt","w",stdout);
+	// #endif
 	IOS
+	// clock_t start,end;
+	// start=clock();
+	// int t;
+	// cin>>t;
+	// for(int i=1;i<=t;i++)
+	// {
+	// 	cout<<"Case #"<<i<<": ";
+	// 	solve();
+
+	// }
 	
 	
-	solve();
+	// end=clock();
 	
+	// double time_taken=double(end-start)/double(CLOCKS_PER_SEC);
+	// cout<<fixed<<setprecision(10)<<time_taken<<" sec"<<endl;
+	lli n;
+	cin>>n;
+	//cout<<n<<endl;
+	a.resize(n+1);
+	
+	for(lli i=1;i<=n;i++)
+	{
+		cin>>a[i];
+		//cout<<a[i];
+	}
+	mset(dp,0);
+	mset(vis,0);
+	lli ans=recu(1,n);
+	cout<<ans<<endl;
 	
 }

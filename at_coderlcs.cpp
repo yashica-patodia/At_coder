@@ -122,3 +122,15 @@ int main()
 	}
 
 	//cout<<dp[sz(s)][sz(t)]<<endl;
+	//iska lcs version 
+	// int solve(int i,int j)
+	// {
+	// 	if(i<0 || j<0)//base condition
+	// 		return 0;
+	// 	if(dp[i][j]!=-1)//if already visited
+	// 		return dp[i][j];
+	// 	if(s[i]==s[j])
+	// 		return dp[i][j]=1+solve(i-1,j-1);
+	// 	return dp[i][j]=max(solve(i-1,j),solve(i,j-1));
+
+	// }

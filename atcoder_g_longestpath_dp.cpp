@@ -1,9 +1,3 @@
-///exchange arguments to find sorting condition
-//order matters
-//consider two elemenys
-//suppose 1 is always above 2 
-//then it means S2>=W1 && S1<W2
-//adding bothbof them S2+W2>S1+W1
 #include<bits/stdc++.h>
 #pragma GCC optimize("Ofast")
 #pragma GCC optimize ("unroll-loops")
@@ -47,54 +41,68 @@ typedef vector<int> vi;
 //typedef  vector<vector<lli> >ncr(1001,vector<lli>(1001,0))
 typedef vector<plli> vplli;
 long long MOD=1000000009;
-lli N=10000001;
 #define addm(x,y) (x+y>=MOD? (x+y-MOD):(x+y))
+lli n,m;
+vector<vector<lli>>adj;
+vector<lli>vis;
+vector<lli>dp;
+void dfs(int v)
+{
+	vis[v]=1;
+	for(auto i:adj[v])
+	{
+		if(!vis[i])
+			dfs(i);
+		dp[v]=max(dp[v],dp[i]+1);
+	}
+}
 void solve()
 {
-	int n;
-	cin>>n;
-	cout<<n;
+	cin>>n>>m;
+//	lev.resize(n+1);
+	adj.resize(n+1);
+	vis.assign(n+1,0);
+	dp.assign(n+1,0);
+	//vector<lli>dis(n+1,0);
 
-	//vector<pair<lli,pair<lli,lli> > >v;
-	// //vector<pair<int,pair<int,int> > >v;
-	// for(int i=0;i<n;i++)
-	// {
-	// 	int w,s,val;
-	// 	cin>>w>>s>>val;
-	// 	cout<<w;
-	// 	//v.push_back({s+w,{w,val}});
-	// 	//v.push_back(MP(s+w,MP(w,val)));
-	// }
-	// // sort(all(v));
-	// cout<<v[0].ff<<v[0].ss.ff<<v[0].ss.ss<<endl;
-	//lli dp[N]={0};
-	// vector<lli>dp(N,0);
-	// for(int i=0;i<n;i++)
-	// {
-	// 	int st=v[i].ff;
-	// 	int w=v[i].ss.ff;
-	// 	int val=v[i].ss.ss;
-	// 	cout<<st<<" "<<w<<" "<<val<<endl;
-	// 	for(int j=st-w;j>=0;j--)
-	// 	{
-	// 		if(j+w<=st)
-	// 			dp[j+w]=max(dp[j+w]*1LL,(dp[j]+val)*1LL);
 
-	// 	}
-	// }
+	for(int i=0;i<m;i++)
+	{
+		lli x,y;
+		cin>>x>>y;
+		adj[x].eb(y);
+		//adj[y].eb(x);
+	}
+	for(int i=1;i<=n;i++)
+	{
+		if(!vis[i])
+			dfs(i);
+	}
+	cout<<*max_element(all(dp))<<endl;
 
-	//cout<<*max_element(all(dp))<<endl;
 }
 int main()
 {
-		#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	freopen("output.txt","w",stdout);
-	#endif
+	// 	#ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// freopen("output.txt","w",stdout);
+	// #endif
 	IOS
+	// clock_t start,end;
+	// start=clock();
+	// int t;
+	// cin>>t;
+	// for(int i=1;i<=t;i++)
+	// {
+	// 	cout<<"Case #"<<i<<": ";
+	// 	solve();
+
+	// }
 	
 	
+	// end=clock();
+	
+	// double time_taken=double(end-start)/double(CLOCKS_PER_SEC);
+	// cout<<fixed<<setprecision(10)<<time_taken<<" sec"<<endl;
 	solve();
-	
-	
 }
